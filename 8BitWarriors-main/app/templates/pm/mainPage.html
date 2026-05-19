@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Manager</title>
+    <link rel="icon" href="static/assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/sidebar.css" />
+    <link rel="stylesheet" href="static/css/pmStyle.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"
+      async
+      defer
+    ></script>
+    <script src="static/js/pm/pmMap.js"></script>
+    <script src="static/js/pm/mainPage.js"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="static/js/sidebar.js"></script>
+    <!-- Include sidebar.js -->
+  </head>
+
+  <body>
+    <!-- Profile Picture in Top Right -->
+    <div id="top-bar-pfp">
+      <a href="/profile">
+        <img
+          src="{{ url_for('routes.get_profile_picture', user_id=session['user']['UUID']) }}"
+          alt="Profile Picture"
+        />
+      </a>
+    </div>
+
+    <div id="jobsiteToEdit" data-jobsite="{{ jobsite }}"></div>
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+      <button id="toggleSidebar" class="toggle-btn">☰</button>
+      <!-- Sidebar Toggle Button -->
+      <div class="logo-container">
+        <a href="https://www.starrelectric.net/" target="_blank">
+          <img
+            src="static/assets/starrwhitelogo.png"
+            alt="Starr Electric Logo"
+          />
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- Jobsite Form -->
+        <div>
+          <div class="form-container">
+            <form
+              action="/submitProject"
+              method="POST"
+              id="submitForm"
+              onsubmit="return validateForm()"
+            >
+              <input type="hidden" name="uuid" id="uuid" />
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Project Name"
+                id="nameInput"
+              />
+              <p id="error1"></p>
+              <input
+                type="text"
+                name="description"
+                placeholder="Project Description"
+                id="descriptionInput"
+              />
+              <p id="error"></p>
+              <input
+                type="text"
+                name="latitude"
+                id="latForm"
+                placeholder="Jobsite Latitude"
+                class="lat"
+              />
+              <p id="error2"></p>
+              <input
+                type="text"
+                name="longitude"
+                id="lngForm"
+                placeholder="Jobsite Longitude"
+                class="long"
+              />
+              <p id="error3"></p>
+              <input
+                type="text"
+                name="radius"
+                id="radiusForm"
+                placeholder="Radius (meters)"
+                class="radius"
+              />
+              <p id="error4"></p>
+              <button type="submit" id="submitButton">Submit</button>
+            </form>
+          </div>
+          <!--
+          <h3 class="sidebarText" id="radiusValue">Radius: 0</h3>
+          <input
+            type="range"
+            id="radiusSlider"
+            min="0"
+            max="1000"
+            value="0"
+            oninput="updateRadiusValue(this.value)"
+            style="width: 90%"
+          />
+          !-->
+          <div class="address-input-section">
+            <input type="text" id="addressInput" placeholder="Enter Address" />
+            <button class="sidebarButton" onclick="geocodeAddress()">
+              Set Location
+            </button>
+            <p id="addressError" style="color: red; font-size: 12px"></p>
+          </div>
+
+          <!-- Add Back Button -->
+          <div class="back-button-section">
+            <form action="/pmLandingPage" method="GET" onsubmit="return confirmNoSave()">
+              <button type="submit" class="sidebarButton">Back</button>
+            </form>
+          </div>
+
+          <!-- Logout Button -->
+          <!--
+          <form
+            action="/returnToLandingPageClicked"
+            class="sidebar-bottom-button"
+            onsubmit="return confirmNoSave()"
+            method="POST"
+          >
+            <button type="submit">Return to Home Page</button>
+          </form>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="header">
+        <div id="sidebar-header">
+          <button
+            class="header-button"
+            title="Sets map to current location"
+            class="sidebar-header-button"
+            onclick="setMapToCurrentLocation()"
+          >
+            ⦻
+          </button>
+          <button
+            class="header-button"
+            title="Sets map to selected location"
+            class="sidebar-header-button"
+            onclick="setMapToSelectedLocation()"
+          >
+            ⟀
+          </button>
+          <!--
+          <button
+            class="header-button"
+            title="How to use"
+            onclick="instructionsAlert()"
+          >
+            🛈
+          </button>
+          -->
+        </div>
+        <!-- header content below here-->
+      </div>
+      <div id="map"></div>
+    </div>
+  </body>
+</html>

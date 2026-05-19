@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Help</title>
+  <link rel="icon" href="static/assets/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="static/css/workerStyle.css">
+  <link rel="stylesheet" href="static/css/sidebar.css">
+  <script src="static/js/sidebar.js"></script>
+  <style>
+    .help-image {
+      max-width: 50%; /* Adjust the size as needed */
+      height: auto;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body class="workerJobsite-body">
+
+  <!-- Top Bar -->
+  <div id="top-bar">
+    <a href="/workerProfile">
+      <img id="currentPfp" 
+           src="{{ url_for('routes.get_profile_picture', user_id=session['user']['UUID']) }}" 
+           alt="Profile Picture" 
+           class="profile-icon">
+    </a>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+    <div class="logo-container">
+      <a href="https://www.starrelectric.net/" target="_blank">
+        <img src="static/assets/starrwhitelogo.png" alt="Starr Electric Logo">
+      </a>
+    </div>
+
+    <div class="sidebar-content">
+      <ul>
+        <li><a href="/workerMainPage">Home</a></li>
+        <li><a href="/workerJobsitesPage">Jobsites</a></li>
+        <li><a href="/workerhelp">Help</a></li> <!-- Current page -->
+      </ul>
+
+      <form action="/logoutButtonClicked" method="POST" onsubmit="return confirmLogout()">
+        <button type="submit" class="logout-button">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <h1>Help & Instructions</h1>
+    <p>Welcome to the Worker Dashboard! Here's a quick guide to navigating the application:</p>
+    <ul>
+      <li>
+        <strong>Home:</strong> This page displays a map showing your current location and the location of your assigned jobsite. You can use this to visualize your proximity to the site.
+      </li>
+      <li>
+        <strong>Jobsites:</strong> Here you can find detailed information about the jobsites you are currently assigned to. This may include the address, site contact, and specific instructions.
+      </li>
+      <li>
+        <strong>Profile:</strong> Access your profile by clicking the icon in the top right corner. On this page, you can update your profile picture and change your password.
+      </li>
+      <li>
+        <strong>Directions:</strong> On the Jobsite details page, you'll find a "Get Directions" button. Clicking this will open your device's default map application with the route to the jobsite pre-filled.
+      </li>
+      <li>
+        <strong>Sidebar Navigation:</strong> Use the menu icon (☰) to open and close the sidebar for navigating between the Home, Jobsites, and Help pages. The sidebar also contains the Logout button.
+      </li>
+      <li>
+        <strong>Logout:</strong> To securely log out of the application, open the sidebar and click the "Logout" button. You will be asked to confirm before logging out.
+      </li>
+    </ul>
+    <p>If you encounter any issues or have questions not covered here, please reach out to your Project Manager for assistance.</p>
+  </div>
+
+</body>
+</html>

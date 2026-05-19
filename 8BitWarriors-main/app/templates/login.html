@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Starr Electric Company, Inc. | Electrical Contractor | United States</title>
+  <link rel="stylesheet" href="static/css/loginStyle.css">
+  <link rel="icon" href="static/assets/favicon.ico" type="image/x-icon"/>
+  <script src="static/js/login.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="logo-container">
+    <a href="https://www.starrelectric.net/" target="_blank">
+      <img src="static/assets/starrwhitelogo.png" alt="Starr Electric Logo">
+    </a>
+  </div>
+  <div class="split-container">
+    <div class="left-side">
+      <div class="container active" id="login-container">
+        <h1>Sign in</h1>
+        <form action="/loginButtonClicked" method="POST" id="loginForm">
+          <p id="error">{{ text }}</p>
+          <h4 for="username">Username</h4>
+          <input type="text" name="username" placeholder="Username">
+          <h4 for="password">Password</h4>
+          <div class="password-container">
+            <input type="password" name="password" placeholder="Password" id="loginPassword">
+            <span class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">&#128065;</span>
+          </div>
+          <button type="submit">Sign in</button>
+        </form>
+        <h3>
+            Don't have an account? <u onclick="switchToCreateAccount()" style="cursor: pointer;">Create one.</u>
+        </h3>
+      </div>
+
+      <div class="container" id="signup-container">
+        <h1>Signup</h1>
+        <form action="/signupButtonClicked" method="POST">
+          <h4 for="username">Username</h4>
+          <input type="text" name="username" placeholder="Username">
+          <h4 for="password">Password</h4>
+          <div class="password-container">
+            <input type="password" name="password" placeholder="Password" minlength="8" required id="signupPassword">
+            <span class="toggle-password" onclick="togglePasswordVisibility('signupPassword')">&#128065;</span>
+          </div>
+          <h4 for="workerType">Worker Type</h4>
+          <select id="signUpType" name="workerType" required>
+            <option value="worker">Worker</option>
+            <option value="pm">Project Manager</option>
+          </select>
+          <button type="submit">Sign Up</button>
+        </form>
+        <h3 id="alert"></h3>
+        <h3>
+            Already have an account? <u onclick="switchToLogin()" style="cursor: pointer;">Sign in.</u>
+        </h3>
+      </div>
+    </div>
+    <div class="right-side"></div>
+  </div>
+</body>
+</html>

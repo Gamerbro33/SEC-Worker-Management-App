@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Jobsites</title>
+  <link rel="icon" href="static/assets/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="static/css/workerStyle.css">
+  <link rel="stylesheet" href="static/css/sidebar.css">
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}" async defer></script>
+  <script src="static/js/sidebar.js"></script>
+</head>
+<body class="workerJobsite-body">
+
+  <!-- Top Bar -->
+  <div id="top-bar">
+    <a href="/workerProfile">
+      <img id="currentPfp" 
+           src="{{ url_for('routes.get_profile_picture', user_id=session['user']['UUID']) }}" 
+           alt="Profile Picture" 
+           class="profile-icon">
+    </a>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+    <div class="logo-container">
+      <a href="https://www.starrelectric.net/" target="_blank">
+        <img src="static/assets/starrwhitelogo.png" alt="Starr Electric Logo">
+      </a>
+    </div>
+    <div class="sidebar-content">
+      <ul>
+        <li><a href="workerMainPage">Home</a></li>
+        <li><a href="workerJobsitesPage">Jobsites</a></li>
+        <li><a href="/workerhelp">Help</a></li>
+
+      </ul>
+      <form action="/logoutButtonClicked" method="POST" onsubmit="return confirmLogout()">
+        <button type="submit" class="logout-button">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <h1>Worker Jobsites Page</h1>
+
+    <div id="assignedJobsites">
+      <h2>Assigned Jobsites</h2>
+      <div id="jobsitesList">Loading jobsite details...</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/getAssignedJobsites')
+        .then(response => response.json())
+        .then(data => {
+          const jobsitesList = document.getElementById('jobsitesList');
+          if (data.success) {
+            jobsitesList.innerHTML = data.jobsites.map(jobsite => `
+              <div class="jobsite" style="margin-bottom: 20px; border: 1px solid #ccc; border-radius: 12px; padding: 20px; text-align: center; background-color: #fff;">
+                <strong>Title:</strong> ${jobsite.title}<br>
+                <strong>Description:</strong> ${jobsite.description}<br>
+                <strong>Latitude:</strong> ${jobsite.latitude}<br>
+                <strong>Longitude:</strong> ${jobsite.longitude}<br>
+                <strong>Radius:</strong> ${jobsite.radius}<br>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=${jobsite.latitude},${jobsite.longitude}" target="_blank" class="directions-button" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Get Directions</a>
+              </div>
+            `).join('');
+          } else {
+            jobsitesList.textContent = 'No jobsites assigned.';
+          }
+        })
+        .catch(error => {
+          document.getElementById('jobsitesList').textContent = 'Error loading jobsite details.';
+        });
+    });
+  </script>
+
+</body>
+</html>

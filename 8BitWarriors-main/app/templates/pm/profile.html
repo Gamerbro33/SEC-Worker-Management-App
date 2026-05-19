@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <!-- Include both your profile and sidebar CSS files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+</head>
+<body>
+  <!-- Top Bar with Profile Picture -->
+  <div id="top-bar" class="top-bar">
+      <!-- Profile picture icon that links to the profile page -->
+      <a href="/profile">
+          <img id="currentPfp" 
+               src="{{ url_for('routes.get_profile_picture', user_id=session['user']['UUID']) }}" 
+               alt="Profile Picture" 
+               class="profile-icon">
+      </a>
+  </div>
+
+  <!-- Sidebar Navigation -->
+<div id="sidebar" class="sidebar">
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+    <div class="logo-container">
+        <a href="https://www.starrelectric.net/" target="_blank">
+            <img src="{{ url_for('static', filename='assets/starrwhitelogo.png') }}" alt="Starr Electric Logo">
+        </a>
+    </div>
+    <div class="sidebar-content">
+        <h2>Navigation</h2>
+        <ul>
+          <li><a href="/pmLandingPage">Home</a></li>
+          <li><a href="/pmMainPage">Add New Jobsite</a></li>
+          <li><a href="/assignUsers">Manage</a></li>
+          <li><a href="/timeCards">TimeCards</a></li> 
+          <li><a href="/pmhelp">Help</a></li>
+
+        </ul>
+        <form action="/logoutButtonClicked" method="POST" onsubmit="return confirmLogout()">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Main Profile Content -->
+    <div class="profile-container">
+        <h1>Welcome, {{ user.username }}!</h1>
+        <p>User ID: {{ user.UUID }}</p>
+        <p>User Type: {{ user.type }}</p>
+        
+        <!-- Optionally, you can display the profile picture again here if desired -->
+        <img id="currentPfpProfile" 
+            src="{{ url_for('routes.get_profile_picture', user_id=user.UUID) }}" 
+            alt="Profile Picture" 
+            width="150">
+        
+        <!-- Form to upload a new profile picture -->
+        <form id="uploadFormBlob" enctype="multipart/form-data">
+            <input type="file" name="profilePic" id="profilePic" accept="image/*">
+            <button type="submit">Upload Profile Picture</button>
+        </form>
+
+        <!-- Change Password Section -->
+        <h2>Change Password</h2>
+        <form id="changePasswordForm" method="POST" action="{{ url_for('routes.change_passwordPM') }}">
+            <div class="password-field">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" name="currentPassword" id="currentPassword">
+                <span class="toggle-password" onclick="togglePasswordVisibility('currentPassword', this)">👁️</span>
+              </div>
+              
+              <div class="password-field">
+                <label for="newPassword">New Password:</label>
+                <input type="password" name="newPassword" id="newPassword">
+                <span class="toggle-password" onclick="togglePasswordVisibility('newPassword', this)">👁️</span>
+              </div>
+              
+              <div class="password-field">
+                <label for="confirmPassword">Confirm New Password:</label>
+                <input type="password" name="confirmPassword" id="confirmPassword">
+                <span class="toggle-password" onclick="togglePasswordVisibility('confirmPassword', this)">👁️</span>
+              </div>
+              
+            <button type="submit">Change Password</button>
+        </form>
+    </div>
+    </div>
+
+  <!-- Include JavaScript files -->
+  <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/pm/profile.js') }}"></script>
+</body>
+</html>
