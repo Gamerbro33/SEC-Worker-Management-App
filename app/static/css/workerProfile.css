@@ -1,0 +1,285 @@
+body, h1, p, form, img {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(16, 75, 145);
+    display: flex;
+    justify-content: flex-end;  /* Align items to the right */
+    align-items: center;        /* Vertically center items */
+    padding-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  #top-bar #currentPfp {
+    width: 40px;
+    height: 40px;
+}
+  
+  body.profile-page {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;  /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Full viewport height */
+    /* Add padding-top to avoid content hiding behind the fixed top bar */
+    padding-top: 60px;
+  }
+  
+  .profile-container {
+    background-color: #ffffff;
+    width: 400px;
+    max-width: 90%;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    transition: box-shadow 0.3s ease;
+    margin-top: 60px;
+  }
+  
+  
+  /* Headings in the profile container */
+  .profile-container h1 {
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: #333;
+  }
+  
+  /* Paragraphs in the profile container */
+  .profile-container p {
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  /* Profile picture inside the profile container */
+  #currentPfp {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;  /* Crop the image nicely */
+    border-radius: 50%;  /* Circular shape */
+    margin-bottom: 1rem;
+    border: 2px solid #ccc;  /* Optional border */
+  }
+  
+  #uploadFormBlob {
+    margin-top: 1rem;
+  }
+  
+  /* File input styling */
+  #uploadFormBlob input[type="file"] {
+    display: block;
+    margin: 0 auto 1rem auto;  /* Center the input and add spacing */
+    font-size: 0.9rem;
+  }
+  
+  /* Upload button styling */
+  #uploadFormBlob button[type="submit"] {
+    background-color: #104B91;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  #uploadFormBlob button[type="submit"]:hover {
+    background-color: #082B5E;
+  }
+
+  /* Sidebar */
+.sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #a9a9a9;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2; /* Above the map */
+  }
+  
+  .sidebar-content {
+    width: 100%;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 10px 0;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #ccc;
+  }
+  
+  .logout-button {
+    background-color: #104B91;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #082B5E;
+  }
+  
+  /* Logo Container */
+  .logo-container {
+    /*width: 100%;*/
+    text-align: center; /* Center the logo horizontally */
+    margin-bottom: -50px;
+  }
+  
+  .logo-container img {
+    width: 150px;
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+.content-wrapper {
+    padding-left: 281px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /*padding: 20px;*/
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding-left: 20px;
+      padding: 20px;
+    }
+  }
+  
+  .profile-container {
+    background-color: #ffffff;
+    width: 400px;
+    max-width: 90%;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: #000 solid 3px;
+  }  
+  
+  .form-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #235696;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    text-align: center; /* Center the form contents */
+  }
+  
+  /* Button Container */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Add spacing between buttons */
+    margin-top: 10px;
+  }
+  
+  /* Password Change Form Styling */
+#changePasswordForm {
+  margin-top: 2rem;
+}
+
+#changePasswordForm label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Apply styles to both password and visible text fields */
+#changePasswordForm input[type="password"],
+#changePasswordForm input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+#changePasswordForm input[type="password"]:focus,
+#changePasswordForm input[type="text"]:focus {
+  border-color: #104B91;
+  outline: none;
+}
+
+#changePasswordForm button[type="submit"] {
+  background-color: #104B91;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+#changePasswordForm button[type="submit"]:hover {
+  background-color: #082B5E;
+}
+
+/* Password field container */
+.password-field {
+  position: relative;
+  margin: 10px 0;
+}
+
+/* Apply styles to both password and text inside the password field wrapper */
+.password-field input[type="password"],
+.password-field input[type="text"] {
+  width: 100%;
+  padding-right: 35px; /* space for eye icon */
+  box-sizing: border-box;
+}
+
+/* Eye icon styling */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1rem;
+  color: #666;
+}

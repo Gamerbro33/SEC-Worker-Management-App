@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PM Help | Starr Electric</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pmLandingPage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon"/>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div id="top-bar" class="top-bar">
+        <a href="/profile">
+            <img id="currentPfp"
+                 src="{{ url_for('routes.get_profile_picture', user_id=session['user']['UUID']) }}"
+                 alt="Profile Picture"
+                 class="profile-icon">
+        </a>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+        <button id="toggleSidebar" class="toggle-btn">☰</button>
+        <div class="logo-container">
+            <a href="https://www.starrelectric.net/" target="_blank">
+                <img src="{{ url_for('static', filename='assets/starrwhitelogo.png') }}" alt="Starr Electric Logo">
+            </a>
+        </div>
+        <div class="sidebar-content">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="/pmLandingPage">Home</a></li>
+                <li><a href="/pmMainPage">Add New Jobsite</a></li>
+                <li><a href="/assignUsers">Manage</a></li>
+                <li><a href="/timeCards">TimeCards</a></li>
+                <li><a href="/pmhelp">Help</a></li>
+            </ul>
+            <form action="/logoutButtonClicked" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Help Content -->
+    <div class="content-wrapper" style="padding: 30px;">
+        <h1>Help & Instructions</h1>
+        <p>Welcome to the Project Manager Dashboard! This guide explains the features available to you:</p>
+        <ul>
+            <li>
+                <strong>Home (Landing Page):</strong> This is your main overview page. It displays a map showing all the jobsites you manage and the current locations of workers assigned to those sites. You can quickly visualize the distribution of your workforce and jobsite locations.
+            </li>
+            <li>
+                <strong>Add New Jobsite:</strong> Navigate here to create a new jobsite entry in the system. You will need to provide the jobsite's name, address (which will be used to fetch coordinates), and define a geofence radius. This radius determines the virtual boundary for clock-in/out purposes.
+            </li>
+            <li>
+                <strong>Manage (Assign Users):</strong> This section allows you to manage worker assignments. You can select a specific jobsite and then assign available workers to it or remove currently assigned workers from it. This ensures workers are linked to the correct projects.
+            </li>
+            <li>
+                <strong>TimeCards:</strong> Access this page to view and manage worker time logs. You can filter time entries by jobsite, worker, and date range. There's also an option to export the filtered time data, typically as a CSV file, for payroll or reporting purposes.
+            </li>
+            <li>
+                <strong>Profile (Top Right Icon):</strong> Click on your profile picture icon in the top right corner to access your personal settings. Here, you can update your profile picture and change your account password.
+            </li>
+            <li>
+                <strong>Sidebar Navigation:</strong> Use the menu icon (☰) to open and close the sidebar. The sidebar provides quick links to all major sections of the PM dashboard: Home, Add New Jobsite, Manage, TimeCards, and this Help page.
+            </li>
+            <li>
+                <strong>Logout:</strong> To securely end your session, open the sidebar and click the "Logout" button. A confirmation prompt will appear before you are logged out.
+            </li>
+        </ul>
+        <p>If you encounter any difficulties or require further assistance, please contact your system administrator or designated support channel.</p>
+    </div>
+</body>
+</html>

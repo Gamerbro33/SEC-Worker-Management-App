@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Manager</title>
+  <link rel="icon" href="static/assets/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="static/css/sidebar.css">
+  <link rel="stylesheet" href="static/css/pmViewStyle.css">
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}" async defer loading="async"></script>
+  <script src="static/js/pm/viewPage.js"></script>
+  <script src="static/js/sidebar.js"></script>
+</head>
+
+<body>
+  <div id="sidebar" class="sidebar">
+    <button id="toggleSidebar" class="toggle-btn">☰</button> <!-- Sidebar Toggle Button -->
+      <!-- Starr Electric Logo -->
+  <div class="logo-container">
+    <a href="https://www.starrelectric.net/" target="_blank">
+      <img src="static/assets/starrwhitelogo.png" alt="Starr Electric Logo">
+    </a>
+  </div>
+    <div class="sidebar-content">      
+      <form action="/returnToLandingPageClicked" onsubmit="return confirmNoSave()" method="POST">
+        <button class="sidebar-button" type="submit">Return to Home Page</button>
+      </form>
+
+      <!-- Logout Button inside the Sidebar -->
+      <form action="/logoutButtonClicked"  method="POST" onsubmit="return confirmLogout()">
+        <button class="sidebar-button" type="submit">Logout</button>
+      </form>
+      <div id="worker-cards-container" class="worker-cards-container">
+        <!-- Worker cards will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+  <!-- sidebar  -->
+  <div id="jobsiteData" data-jobsite='{{ jobsite }}'></div>
+  </div>
+
+  <!-- content -->
+  <div class="content">
+    <div class="header">
+      <h2 id="jobsite-title">Jobsite Title</h2>
+    </div>
+    <div id="map"></div>
+  </div>
+</body>
+
+</html>
