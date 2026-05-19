@@ -1,0 +1,8 @@
+tempJobsite.db
+templateUser.db
+trackedJobsites.db
+database.db
+.env
+__pycache__/
+venv/
+.vs/
